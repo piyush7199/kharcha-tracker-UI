@@ -21,8 +21,6 @@ const MobileNav = ({ onOpen, ...rest }) => {
   const location = useLocation();
   const { user } = useContext(DataContext);
 
-  console.log(user);
-
   return (
     <Flex
       flexDir="column"
