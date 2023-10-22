@@ -9,15 +9,19 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { FiMenu } from "react-icons/fi";
-import React from "react";
+import React, { useContext } from "react";
 
 import { COLORS } from "../../Constants/constants";
 import DatePickerModel from "../Model/DatePickerModel";
 import { useLocation } from "react-router-dom";
 import DateRangePicker from "../Model/DateRangePicker";
+import { DataContext } from "../Context/DataProvider";
 
 const MobileNav = ({ onOpen, ...rest }) => {
   const location = useLocation();
+  const { user } = useContext(DataContext);
+
+  console.log(user);
 
   return (
     <Flex
@@ -70,7 +74,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
                   backgroundColor={COLORS.MAIN_COLOR}
                   alignContent="center"
                   size={"sm"}
-                  name={"Piyush"}
+                  name={user.name}
                 />
                 <VStack
                   display={{ base: "none", md: "flex" }}
@@ -79,7 +83,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
                   ml="2"
                 >
                   <Text fontSize="sm" marginRight="1.5rem">
-                    Piyush Lahoti
+                    {user.name}
                   </Text>
                 </VStack>
               </HStack>
