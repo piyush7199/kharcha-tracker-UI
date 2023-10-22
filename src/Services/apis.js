@@ -2,7 +2,7 @@ import axios from "axios";
 import { API_NOTIFICATION_MESSAGES, SERVICE_URLS } from "../Constants/config";
 import { getAccessToken, getType } from "../Utility/common-utils";
 
-const API_URL = process.env.REACT_APP_BASEURL;
+const API_URL = "https://api-kharchatracker.onrender.com";
 
 const axiosInstance = axios.create({
   baseURL: API_URL,
