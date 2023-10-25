@@ -96,6 +96,7 @@ const Models = ({
       <Button sx={buttonStyle} onClick={handleAdd}>
         Add
       </Button>
+      {/* //<Button>SUbmit</Button> */}
       {isAdding && (
         <Modal
           isOpen={isAdding}

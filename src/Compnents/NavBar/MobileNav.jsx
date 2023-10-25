@@ -19,7 +19,8 @@ import { DataContext } from "../Context/DataProvider";
 
 const MobileNav = ({ onOpen, ...rest }) => {
   const location = useLocation();
-  const { user } = useContext(DataContext);
+  const { user, startDate, endDate, setStartDate, setEndDate } =
+    useContext(DataContext);
 
   return (
     <Flex
@@ -57,9 +58,12 @@ const MobileNav = ({ onOpen, ...rest }) => {
           <Flex alignItems={"center"}>
             {location && location.pathname === "/home" ? (
               <HStack spacing="1px" ml="2">
-                <DatePickerModel />
+                <DatePickerModel
+                  setStartDate={setStartDate}
+                  setEndDate={setEndDate}
+                />
                 <Box display={{ base: "none", md: "flex" }} mr={4}>
-                  <DateRangePicker />
+                  <DateRangePicker startDate={startDate} endDate={endDate} />
                 </Box>
               </HStack>
             ) : (
@@ -89,13 +93,15 @@ const MobileNav = ({ onOpen, ...rest }) => {
           </Flex>
         </HStack>
       </Flex>
-      <Box
-        ml={{ base: 0, md: 60 }}
-        px={{ base: 4, md: 4 }}
-        display={{ base: "flex", md: "none" }}
-      >
-        <DateRangePicker />
-      </Box>
+      {location && location.pathname === "/home" ? (
+        <Box
+          ml={{ base: 0, md: 60 }}
+          px={{ base: 4, md: 4 }}
+          display={{ base: "flex", md: "none" }}
+        >
+          <DateRangePicker startDate={startDate} endDate={endDate} />
+        </Box>
+      ) : null}
     </Flex>
   );
 };

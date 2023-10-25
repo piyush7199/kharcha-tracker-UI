@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -19,12 +19,9 @@ import {
   getStartDate,
 } from "../../Constants/constants";
 import { IoCalendarNumber } from "react-icons/io5";
-import { DataContext } from "../Context/DataProvider";
 
-const DatePickerModel = () => {
+const DatePickerModel = ({ setStartDate, setEndDate }) => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const { setStartDate, setEndDate } = useContext(DataContext);
 
   const initalState = {
     startDate: getStartDate(),
@@ -44,6 +41,7 @@ const DatePickerModel = () => {
     console.log("Selected Date Range:", dateRange.startDate, dateRange.endDate);
     setStartDate(dateRange.startDate);
     setEndDate(dateRange.endDate);
+    setDateRange(initalState);
     setIsOpen(false);
   };
 

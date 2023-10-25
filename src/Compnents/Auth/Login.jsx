@@ -14,6 +14,7 @@ import {
   Flex,
   FormControl,
   FormLabel,
+  Spacer,
 } from "@chakra-ui/react";
 import {
   COLORS,
@@ -154,12 +155,9 @@ const LoginPage = ({ setIsVerified, isUserAuthenticated }) => {
               </FormControl>
             </Stack>
             <Stack>
-              <HStack align={"start"} justify={"space-between"}>
-                <Checkbox size={{ base: "sm", md: "md" }}>Remember me</Checkbox>
-                <Text
-                  color={"blue.400"}
-                  fontSize={{ base: "0.85rem", md: "0.95rem" }}
-                >
+              <HStack align={"end"} justify={"space-between"}>
+                <Spacer />
+                <Text color={"blue.400"} fontSize="0.95rem">
                   <Link
                     onClick={() => {
                       navigate("/account/reset");

@@ -7,6 +7,7 @@ import {
   PAGENAMES,
   contactErrorToast,
   getStartDate,
+  getCurrentDate,
   getToast,
 } from "../../Constants/constants";
 import { API } from "../../Services/apis";
@@ -32,12 +33,17 @@ const Investment = () => {
   const { load } = useContext(DataContext);
   const [data, setData] = useState([]);
   const [totalInvestment, setTotalInvestment] = useState("");
+  const [endDate, setEndDate] = useState(getCurrentDate());
+  const [startDate, setStartDate] = useState(getStartDate());
   const toast = useToast();
 
   useEffect(() => {
     const getDate = async () => {
       try {
-        const res = await API.getInvestment({ startDate: getStartDate() });
+        const res = await API.getInvestment({
+          startDate: startDate,
+          endDate: endDate,
+        });
         if (res.isSuccess) {
           setData(res.data.investmentData);
           setTotalInvestment(res.data.totalInvestment);
@@ -56,7 +62,7 @@ const Investment = () => {
       }
     };
     getDate();
-  }, [load]);
+  }, [load, startDate, endDate]);
 
   const elements = [
     { title: "Total Investment", stat: totalInvestment, icon: LiaCoinsSolid },
@@ -68,6 +74,10 @@ const Investment = () => {
       data={data}
       pageName={PAGENAMES.INVESTMENT}
       columnDetails={columnDetails}
+      setStartDate={setStartDate}
+      setEndDate={setEndDate}
+      startDate={startDate}
+      endDate={endDate}
     />
   );
 };

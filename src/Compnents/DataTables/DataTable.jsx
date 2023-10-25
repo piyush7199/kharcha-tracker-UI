@@ -13,12 +13,16 @@ import {
   useColorModeValue,
   Icon,
   Flex,
+  Button,
+  Text,
 } from "@chakra-ui/react";
 
 import { COLORS } from "../../Constants/constants";
 import { HiSortAscending, HiSortDescending } from "react-icons/hi";
 import Models from "../Model/Models";
 import EditModel from "../Model/EditModel";
+import DateRangePicker from "../Model/DateRangePicker";
+import DatePickerModel from "../Model/DatePickerModel";
 
 const DataTable = ({
   subCategoryOptions,
@@ -28,6 +32,10 @@ const DataTable = ({
   categoryOptions,
   data,
   investedInOptions,
+  setStartDate,
+  setEndDate,
+  startDate,
+  endDate,
 }) => {
   const columns = React.useMemo(() => {
     const firstColumn = [
@@ -103,7 +111,7 @@ const DataTable = ({
         alignItems="center"
         mb={4}
       >
-        <Box mb={2} width={{ base: "100%", md: "auto" }}>
+        <Box mb={2}>
           <Models
             subCategoryOptions={subCategoryOptions}
             paymentOptions={paymentOptions}
@@ -112,12 +120,17 @@ const DataTable = ({
             investedInOptions={investedInOptions}
           />
         </Box>
+        <Box display={{ base: "none", md: "flex" }}>
+          <Text>Statement from</Text> &nbsp;
+          <DateRangePicker startDate={startDate} endDate={endDate} />
+        </Box>
+        <DatePickerModel setEndDate={setEndDate} setStartDate={setStartDate} />
       </Flex>
+      <Box display={{ base: "flex", md: "none" }}>
+        <DateRangePicker startDate={startDate} endDate={endDate} />
+      </Box>
       <TableContainer>
         <Table variant="striped" bg={COLORS.MAIN_COLOR} {...getTableProps()}>
-          <TableCaption>
-            Statement for the month of {new Date().getMonth()}
-          </TableCaption>
           <Thead>
             {headerGroups.map((headerGroup) => (
               <Tr {...headerGroup.getHeaderGroupProps()}>

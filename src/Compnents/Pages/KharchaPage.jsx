@@ -13,6 +13,10 @@ const KharchaPage = ({
   categoryOptions,
   elements,
   data,
+  setStartDate,
+  setEndDate,
+  endDate,
+  startDate,
 }) => {
   return (
     <Box>
@@ -28,6 +32,10 @@ const KharchaPage = ({
           subCategoryOptions={subCategoryOptions}
           paymentOptions={paymentOptions}
           investedInOptions={investedInOptions}
+          setStartDate={setStartDate}
+          setEndDate={setEndDate}
+          startDate={startDate}
+          endDate={endDate}
         />
       </Box>
     </Box>

@@ -14,7 +14,6 @@ import { AiOutlineWallet } from "react-icons/ai";
 import { LiaCoinsSolid } from "react-icons/lia";
 import { TbCurrencyRupee } from "react-icons/tb";
 import { BsToggleOff, BsToggleOn } from "react-icons/bs";
-// import { RiFeedbackLine } from "react-icons/ri";
 import { MdLogout } from "react-icons/md";
 
 import { COLORS } from "../../Constants/constants";
@@ -30,29 +29,34 @@ const SidebarContent = ({ onClose, ...rest }) => {
     navigate("/login");
   };
 
+  const modeChange = () => {
+    toggleColorMode();
+    onClose();
+  };
+
   const handleHome = () => {
     navigate("/home");
+    onClose();
   };
 
   const handleExpense = () => {
     navigate("/expenses");
+    onClose();
   };
 
   const handleIncome = () => {
     navigate("/income");
+    onClose();
   };
 
   const handleInvestments = () => {
     navigate("/investments");
+    onClose();
   };
 
   const handleContactUs = () => {
     window.open("mailto:kharchatracker@gmail.com", "_blank");
   };
-
-  // const handleFeedback = () => {
-  //   navigate("");
-  // };
 
   const LinkItems = [
     {
@@ -86,7 +90,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
     {
       name: "Dark Mode",
       icon: colorMode === "light" ? BsToggleOff : BsToggleOn,
-      func: toggleColorMode,
+      func: modeChange,
     },
     {
       name: "Logout",
@@ -97,6 +101,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
 
   return (
     <Box
+      transition="3s ease"
       bg={useColorModeValue("white", COLORS.DARK_BLACK_COLOR)}
       borderRight="1px"
       borderRightColor={useColorModeValue("gray.200", "gray.700")}

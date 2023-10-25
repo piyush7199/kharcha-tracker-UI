@@ -6,6 +6,7 @@ import {
   PAGENAMES,
   contactErrorToast,
   getStartDate,
+  getCurrentDate,
   getToast,
 } from "../../Constants/constants";
 import { DataContext } from "../Context/DataProvider";
@@ -47,12 +48,17 @@ const Expense = () => {
   const { load } = useContext(DataContext);
   const [data, setData] = useState([]);
   const [totalExpense, setTotaltotalExpense] = useState("");
+  const [endDate, setEndDate] = useState(getCurrentDate());
+  const [startDate, setStartDate] = useState(getStartDate());
   const toast = useToast();
 
   useEffect(() => {
     const getDate = async () => {
       try {
-        const res = await API.getExpense({ startDate: getStartDate() });
+        const res = await API.getExpense({
+          startDate: startDate,
+          endDate: endDate,
+        });
         if (res.isSuccess) {
           setData(res.data.expenseData);
           setTotaltotalExpense(res.data.totalExpense);
@@ -71,7 +77,7 @@ const Expense = () => {
       }
     };
     getDate();
-  }, [load]);
+  }, [load, startDate, endDate]);
 
   const elements = [
     { title: "Total Expenses", stat: totalExpense, icon: AiOutlineWallet },
@@ -85,6 +91,10 @@ const Expense = () => {
       data={data}
       pageName={PAGENAMES.EXPENSE}
       columnDetails={columnDetails}
+      setStartDate={setStartDate}
+      setEndDate={setEndDate}
+      startDate={startDate}
+      endDate={endDate}
     />
   );
 };
